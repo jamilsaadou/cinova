@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ActorLogos } from "@/components/ActorLogos";
 import { Reveal } from "@/components/Reveal";
 import { Counter } from "@/components/Counter";
 import { Photo } from "@/components/Photo";
@@ -59,6 +60,7 @@ export default async function HomePage({
         <Audience />
         <Jury />
         <CtaBand />
+        <ActorLogos />
       </main>
       <Footer />
     </>

@@ -1,4 +1,7 @@
 {
+  "actors": {
+    "title": "Les acteurs du challenge"
+  },
   "common": {
     "appName": "CINOVA",
     "fullName": "Challenge national de l'innovation agropastorale et numérique",

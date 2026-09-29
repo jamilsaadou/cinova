@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ActorLogos } from "@/components/ActorLogos";
 import { Reveal } from "@/components/Reveal";
 import { Photo } from "@/components/Photo";
 import { photos } from "@/lib/images";
@@ -42,6 +43,7 @@ export default async function PresentationPage({
         <PresObjectives />
         <PresCalendar />
         <PresCta />
+        <ActorLogos />
       </main>
       <Footer />
     </>
