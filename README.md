@@ -53,6 +53,28 @@ L'application est disponible sur http://localhost:3000
 | `npm run db:migrate` | Applique les migrations Prisma |
 | `npm run db:studio` | Interface Prisma Studio |
 
+## Compte administrateur sur le VPS
+
+Depuis le dossier du projet, avec Node.js 22+ et `DATABASE_URL` configurée
+dans l'environnement ou dans `.env`, exécuter dans Bash :
+
+```bash
+git pull --ff-only origin main
+npm ci
+npx prisma generate
+read -r -p "Email administrateur : " ADMIN_EMAIL
+read -r -s -p "Mot de passe (12 caractères minimum) : " ADMIN_PASSWORD
+echo
+export ADMIN_EMAIL ADMIN_PASSWORD
+npm run admin:create
+unset ADMIN_EMAIL ADMIN_PASSWORD
+```
+
+La commande crée un compte administrateur avec un email validé. Si le compte
+existe déjà avec un mot de passe, elle le promeut administrateur et conserve
+son mot de passe actuel. Se reconnecter sur `/login`, puis ouvrir `/admin`.
+Le mot de passe saisi n'est pas affiché et ne figure pas dans l'historique Bash.
+
 ## Structure
 
 ```
