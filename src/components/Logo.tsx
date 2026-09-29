@@ -8,7 +8,7 @@ type LogoProps = {
 };
 
 // Logo officiel CINOVA (verrouillage complet). La variante blanche
-// est obtenue par filtre CSS pour les fonds foncés (footer, etc.).
+// conserve les couleurs du logo sur fond blanc pour les surfaces foncées.
 export function Logo({ variant = "color", className, priority }: LogoProps) {
   return (
     <Link href="/" aria-label="CINOVA — accueil" className="inline-flex">

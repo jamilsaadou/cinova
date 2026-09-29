@@ -65,9 +65,10 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Logo en blanc sur fonds foncés (le logo source est en couleur) */
+/* Le logo source est opaque : conserver ses couleurs sur un fond blanc. */
 .logo-white {
-  filter: brightness(0) invert(1);
+  background-color: white;
+  border-radius: 0.25rem;
 }
 
 /* Motif de cercles concentriques (rappel de l'identité visuelle) */
