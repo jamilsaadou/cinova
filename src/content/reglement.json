@@ -1,0 +1,141 @@
+{
+  "version": "Version de travail 0.1",
+  "updated": "2026-08-28",
+  "articles": [
+    {
+      "id": "objet",
+      "title": "Article 1 — Objet et organisateur",
+      "paragraphs": [
+        "Le présent règlement fixe les conditions de participation au challenge CINOVA — Challenge national de l'innovation agropastorale et numérique (« le Challenge »), organisé par le Réseau National des Chambres d'Agriculture du Niger (RECA) (« l'Organisateur »).",
+        "Le Challenge est un hackathon national dont l'objet est de concevoir ou d'adapter des services numériques capables de porter l'information agricole jusqu'au producteur, jusqu'à la décision prise au champ."
+      ]
+    },
+    {
+      "id": "definitions",
+      "title": "Article 2 — Définitions",
+      "paragraphs": [
+        "Équipe : groupe de participants déposant une candidature commune.",
+        "Chef d'équipe : personne qui crée l'équipe, renseigne ses membres et représente l'équipe auprès de l'Organisateur.",
+        "Défi : problématique retenue par le comité technique du RECA sur laquelle portent les solutions.",
+        "Livrable : prototype et présentation soumis au jury à l'issue du hackathon."
+      ]
+    },
+    {
+      "id": "eligibilite",
+      "title": "Article 3 — Conditions d'éligibilité et de recevabilité",
+      "paragraphs": [
+        "Le Challenge est ouvert aux développeurs, ingénieurs, data-analystes, designers, étudiants, porteurs de solutions numériques, startups, agronomes, conseillers agricoles et représentants d'organisations de producteurs."
+      ],
+      "list": [
+        "Être majeur à la date de dépôt de la candidature [à confirmer].",
+        "Constituer une équipe pluridisciplinaire ; une taille indicative de 3 à 5 membres est recommandée [à confirmer].",
+        "Accepter le présent règlement et les clauses de propriété intellectuelle lors de l'inscription.",
+        "Déposer une candidature complète avant la date de clôture."
+      ]
+    },
+    {
+      "id": "participation",
+      "title": "Article 4 — Modalités de participation",
+      "paragraphs": [
+        "Deux pistes de participation sont ouvertes :",
+        "Piste Création : l'équipe conçoit un prototype pendant l'événement à partir des défis formulés.",
+        "Piste Adaptation : l'équipe ajuste une solution existante aux défis retenus.",
+        "L'inscription et le dépôt se font en ligne sur la plateforme CINOVA. Le chef d'équipe crée l'équipe et renseigne les informations de chaque membre (nom, rôle, sexe, région)."
+      ]
+    },
+    {
+      "id": "defis",
+      "title": "Article 5 — Défis et jeux de données",
+      "paragraphs": [
+        "Sept défis sont soumis au comité technique du RECA, qui en retient trois au maximum pour l'édition : alerte précoce, information de marché, traçabilité des intrants, warrantage, gestion des coopératives, valorisation du conseil agricole et fertilité des sols.",
+        "Les jeux de données mis à disposition, leur format et leurs limites sont présentés lors des webinaires et publiés avec l'appel à candidatures."
+      ]
+    },
+    {
+      "id": "calendrier",
+      "title": "Article 6 — Calendrier et phases",
+      "paragraphs": [
+        "Le Challenge se déroule en cinq phases : cadrage, webinaires d'information, appel à candidatures, présélection et bootcamp, puis hackathon de 48 heures, suivi d'un accompagnement des lauréats."
+      ],
+      "list": [
+        "Ouverture des candidatures : [à compléter].",
+        "Clôture des candidatures : [à compléter].",
+        "Notification de présélection : [à compléter].",
+        "Bootcamp : [à compléter].",
+        "Hackathon (48 h) à Niamey : [à compléter]."
+      ]
+    },
+    {
+      "id": "candidature",
+      "title": "Article 7 — Dossier de candidature",
+      "paragraphs": [
+        "Le dossier comprend la présentation de l'équipe et de ses membres, la piste choisie, le défi visé et une note décrivant l'idée ou la solution.",
+        "La grille de notation est publiée en même temps que l'appel à candidatures."
+      ]
+    },
+    {
+      "id": "preselection",
+      "title": "Article 8 — Présélection et quota régional",
+      "paragraphs": [
+        "La présélection est réalisée par le comité technique selon la grille publiée, avec application d'un quota régional et vérification de la mixité des équipes.",
+        "Les candidats retenus et non retenus reçoivent une notification avec un retour motivé."
+      ]
+    },
+    {
+      "id": "jury",
+      "title": "Article 9 — Jury et critères d'évaluation",
+      "paragraphs": [
+        "Le jury est organisé en deux collèges délibérant conjointement : un collège technique et un collège des producteurs.",
+        "Le collège des producteurs dispose d'un droit de veto sur l'utilisabilité : une solution jugée inutilisable ne peut être primée, quelle que soit sa qualité technique.",
+        "Les critères d'évaluation (pertinence, faisabilité, utilisabilité, impact, pérennité) et leur pondération sont arrêtés par le comité technique et publiés avec l'appel à candidatures."
+      ]
+    },
+    {
+      "id": "prix",
+      "title": "Article 10 — Prix et distinctions",
+      "paragraphs": [
+        "Des prix récompensent les meilleures équipes par défi, complétés par des prix transversaux.",
+        "La nature et la dotation des prix sont précisées par le comité technique avant l'ouverture des candidatures [à compléter]."
+      ]
+    },
+    {
+      "id": "pi",
+      "title": "Article 11 — Propriété intellectuelle",
+      "paragraphs": [
+        "Les conditions de propriété intellectuelle sont publiées avant le dépôt des candidatures et acceptées formellement à l'inscription.",
+        "Les équipes conservent la titularité de leurs créations, sous réserve des dispositions précisées par le comité technique. Une licence d'usage au bénéfice du RECA et de ses partenaires pourra être prévue [à préciser]."
+      ]
+    },
+    {
+      "id": "ethique",
+      "title": "Article 12 — Cadre éthique et données personnelles",
+      "paragraphs": [
+        "Les participants s'engagent à respecter un cadre éthique et la réglementation applicable à la protection des données personnelles.",
+        "Les données collectées via la plateforme sont utilisées aux seules fins de l'organisation du Challenge."
+      ]
+    },
+    {
+      "id": "priseencharge",
+      "title": "Article 13 — Prise en charge",
+      "paragraphs": [
+        "Les équipes retenues hors Niamey sont prises en charge pour leur déplacement et leur hébergement, dans les conditions et limites définies par l'Organisateur [à compléter]."
+      ]
+    },
+    {
+      "id": "image",
+      "title": "Article 14 — Droit à l'image et communication",
+      "paragraphs": [
+        "Les participants autorisent l'Organisateur à utiliser les images, sons et productions réalisés dans le cadre du Challenge à des fins de communication et de capitalisation, sauf opposition écrite."
+      ]
+    },
+    {
+      "id": "divers",
+      "title": "Article 15 — Modification, annulation et acceptation",
+      "paragraphs": [
+        "L'Organisateur se réserve le droit de modifier, reporter ou annuler le Challenge en cas de force majeure ou de circonstances l'exigeant.",
+        "La participation au Challenge implique l'acceptation pleine et entière du présent règlement.",
+        "Contact : [à compléter — personne de contact du RECA]."
+      ]
+    }
+  ]
+}

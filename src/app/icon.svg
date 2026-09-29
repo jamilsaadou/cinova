@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E5631"/>
+      <stop offset="1" stop-color="#123A24"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <!-- champ / arc -->
+  <path d="M8 46c10 6 38 6 48 0v10H8z" fill="#2E7D46" opacity="0.55"/>
+  <!-- pousse : tige + feuilles -->
+  <path d="M32 50V26" stroke="#DCEBC8" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M32 34c-8 0-13-4-13-11 7 0 13 3 13 11Z" fill="#A9BE8E"/>
+  <path d="M32 30c0-7 5-11 12-11 0 7-5 11-12 11Z" fill="#DCEBC8"/>
+  <!-- accent orange (circuit) -->
+  <circle cx="46" cy="18" r="4" fill="#E98A2B"/>
+</svg>
