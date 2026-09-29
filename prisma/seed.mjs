@@ -1,6 +1,7 @@
-// Amorce la base : une édition active + ses défis.
+// Amorce la base : administrateur optionnel, édition active et défis.
 // Lancer : npm run db:seed   (Node charge .env via --env-file)
 import { PrismaClient } from "@prisma/client";
+import { seedAdmin } from "./seed-admin.mjs";
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,12 @@ const CHALLENGES = [
 ];
 
 async function main() {
+  if (process.env.ADMIN_EMAIL || process.env.ADMIN_PASSWORD) {
+    await seedAdmin(prisma);
+  } else {
+    console.log("Administrateur ignoré : définissez ADMIN_EMAIL et ADMIN_PASSWORD pour le créer.");
+  }
+
   // Édition active (une seule à la fois)
   let edition = await prisma.edition.findFirst({ where: { year: 2026 } });
   if (!edition) {

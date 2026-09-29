@@ -15,7 +15,7 @@
     "db:studio": "prisma studio",
     "db:generate": "prisma generate",
     "reglement:pdf": ".venv/bin/python scripts/build-reglement-pdf.py",
-    "db:seed": "node --env-file=.env prisma/seed.mjs",
+    "db:seed": "node --env-file-if-exists=.env prisma/seed.mjs",
     "admin:create": "node --env-file-if-exists=.env scripts/create-admin.mjs"
   },
   "dependencies": {

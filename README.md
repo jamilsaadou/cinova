@@ -53,7 +53,7 @@ L'application est disponible sur http://localhost:3000
 | `npm run db:migrate` | Applique les migrations Prisma |
 | `npm run db:studio` | Interface Prisma Studio |
 
-## Compte administrateur sur le VPS
+## Seed et compte administrateur sur le VPS
 
 Depuis le dossier du projet, avec Node.js 22+ et `DATABASE_URL` configurée
 dans l'environnement ou dans `.env`, exécuter dans Bash :
@@ -66,11 +66,15 @@ read -r -p "Email administrateur : " ADMIN_EMAIL
 read -r -s -p "Mot de passe (12 caractères minimum) : " ADMIN_PASSWORD
 echo
 export ADMIN_EMAIL ADMIN_PASSWORD
-npm run admin:create
+npm run db:seed
 unset ADMIN_EMAIL ADMIN_PASSWORD
 ```
 
-La commande crée un compte administrateur avec un email validé. Si le compte
+Le seed initialise l’édition et ses sept défis, puis permet de disposer d’un
+compte administrateur avec un email validé. Sans variables `ADMIN_EMAIL` et
+`ADMIN_PASSWORD`, il initialise uniquement l’édition et les défis.
+La commande `npm run admin:create` reste disponible pour gérer uniquement
+l’administrateur. Si le compte
 existe déjà avec un mot de passe, elle le promeut administrateur et conserve
 son mot de passe actuel. Se reconnecter sur `/login`, puis ouvrir `/admin`.
 Le mot de passe saisi n'est pas affiché et ne figure pas dans l'historique Bash.
