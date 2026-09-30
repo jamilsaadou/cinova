@@ -7,6 +7,7 @@ const actors = [
   { src: "oxfam.jpg", alt: "Oxfam" },
   { src: "cooperation-allemande.jpg", alt: "Coopération allemande" },
   { src: "giz.jpg", alt: "GIZ" },
+  { src: "apaesc-ao.jpg", alt: "APAESC-AO" },
 ] as const;
 
 export function ActorLogos() {
@@ -18,9 +19,9 @@ export function ActorLogos() {
         <h2 id="actors-title" className="font-display text-center text-2xl font-bold text-forest sm:text-3xl">
           {t("title")}
         </h2>
-        <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-center justify-items-center gap-x-4 gap-y-3 md:grid-cols-5 md:gap-6">
+        <ul className="mx-auto mt-6 grid max-w-5xl grid-cols-2 items-center justify-items-center gap-x-4 gap-y-3 md:grid-cols-6 md:gap-6">
           {actors.map((actor) => (
-            <li key={actor.src} className="w-full min-w-0 max-w-36 last:col-span-2 md:max-w-40 md:last:col-span-1">
+            <li key={actor.src} className="w-full min-w-0 max-w-36 md:max-w-40">
               <Image
                 src={`/images/actors/${actor.src}`}
                 alt={actor.alt}
