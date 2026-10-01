@@ -44,6 +44,7 @@ export default async function EspacePage({
   const daysLeft = edition?.applicationsCloseAt
     ? Math.max(
         0,
+        // eslint-disable-next-line react-hooks/purity -- Page serveur dynamique : échéance calculée à chaque requête.
         Math.ceil((edition.applicationsCloseAt.getTime() - Date.now()) / 86_400_000),
       )
     : null;

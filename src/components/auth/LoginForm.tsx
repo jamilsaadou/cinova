@@ -2,7 +2,8 @@
 
 import { useActionState, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useSession } from "next-auth/react";
+import { Link, useRouter } from "@/i18n/navigation";
 import {
   loginAction,
   resendVerificationAction,
@@ -16,8 +17,22 @@ const resendInitial: ResendState = { status: "idle" };
 export function LoginForm() {
   const t = useTranslations("auth");
   const locale = useLocale();
+  const router = useRouter();
+  const { update, status } = useSession();
   const [email, setEmail] = useState("");
-  const [state, formAction, isPending] = useActionState(loginAction, loginInitial);
+  const [state, formAction, isPending] = useActionState(
+    async (previous: LoginState, formData: FormData): Promise<LoginState> => {
+      const result = await loginAction(previous, formData);
+      if (result.status === "success") {
+        // Actualise tous les consommateurs de useSession, notamment le menu.
+        await update();
+        router.replace("/espace");
+        router.refresh();
+      }
+      return result;
+    },
+    loginInitial,
+  );
 
   return (
     <div className="space-y-4">
@@ -55,7 +70,7 @@ export function LoginForm() {
 
         <button
           type="submit"
-          disabled={isPending}
+          disabled={isPending || status === "loading" || state.status === "success"}
           className="w-full rounded-full bg-green px-6 py-3 text-sm font-semibold text-cream-50 shadow-sm transition hover:bg-forest-700 disabled:opacity-60"
         >
           {isPending ? t("login.submitting") : t("login.submit")}

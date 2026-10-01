@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 
 export const AUDIT_ACTIONS = [
+  "USER_MANAGEMENT",
   "REGISTER",
   "LOGIN",
   "SUBMIT",

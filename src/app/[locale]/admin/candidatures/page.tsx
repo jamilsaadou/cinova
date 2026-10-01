@@ -1,3 +1,4 @@
+import { requireBackoffice } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { listTeamsPaged, type TeamFilters } from "@/lib/admin";
@@ -30,6 +31,7 @@ export default async function AdminCandidaturesPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const viewer = await requireBackoffice();
   const sp = await searchParams;
 
   const filters: TeamFilters = {
@@ -140,7 +142,7 @@ export default async function AdminCandidaturesPage({
             {t("exportCsv")}
           </a>
         </div>
-        <CandidaturesTable rows={rows} statusOptions={bulkStatuses} labels={tableLabels} />
+        <CandidaturesTable readOnly={viewer.role === "AUDITOR"} rows={rows} statusOptions={bulkStatuses} labels={tableLabels} />
         <Pagination page={paged.page} pages={paged.pages} params={sp} basePath="/admin/candidatures" />
       </Reveal>
     </div>

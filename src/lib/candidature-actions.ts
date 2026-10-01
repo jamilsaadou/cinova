@@ -1,5 +1,7 @@
 "use server";
 
+import { validAttachment } from "@/lib/attachment-types";
+
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -268,7 +270,7 @@ export async function saveProjectAction(
 
 const MAX_ATTACH = 6;
 const MAX_SIZE = 4 * 1024 * 1024; // 4 Mo
-const ALLOWED = ["image/png", "image/jpeg", "image/webp", "image/gif"];
+const ALLOWED = ["image/png", "image/jpeg", "image/webp", "image/gif", "application/pdf"];
 
 export async function uploadAttachmentAction(
   _prev: FormState,
@@ -304,6 +306,10 @@ export async function uploadAttachmentAction(
       continue;
     }
     const bytes = Buffer.from(await file.arrayBuffer());
+    if (!validAttachment(bytes, file.type)) {
+      lastError = "bad_type";
+      continue;
+    }
     await prisma.attachment.create({
       data: {
         teamId: team.id,

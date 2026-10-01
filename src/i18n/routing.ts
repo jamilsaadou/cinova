@@ -4,6 +4,8 @@ import { defineRouting } from "next-intl/routing";
 export const routing = defineRouting({
   locales: ["fr", "en", "ha"],
   defaultLocale: "fr",
+  // Les URL sans préfixe restent en français, indépendamment du navigateur et des cookies.
+  localeDetection: false,
   // Le préfixe de locale n'apparaît pas pour le français ; /en et /ha pour les autres.
   localePrefix: "as-needed",
 });

@@ -11,6 +11,7 @@ import { photos, galleryPhotos } from "@/lib/images";
 import { getPublicStats } from "@/lib/analytics";
 import { Donut, CHART_COLORS } from "@/components/charts";
 import {
+  IconShield,
   IconAlert,
   IconMarket,
   IconInputs,
@@ -85,7 +86,7 @@ function LiveStats({
 
   const codeToKey: Record<string, string> = {
     ALERT: "alert", MARKET: "market", INPUTS: "inputs", WARRANTAGE: "warrantage",
-    COOP: "cooperatives", ADVISORY: "advisory", SOIL: "soil",
+    COOP: "cooperatives", ADVISORY: "advisory", SOIL: "soil", AGROECOLOGY: "agroecology", RELIABILITY: "reliability",
   };
   const topChallenges = Object.entries(stats.byChallenge)
     .sort((a, b) => b[1] - a[1])
@@ -402,13 +403,15 @@ function Tracks() {
 function Challenges() {
   const t = useTranslations("challenges");
   const items = [
+    { key: "agroecology", Icon: IconSprout },
+    { key: "advisory", Icon: IconAdvisory },
     { key: "alert", Icon: IconAlert },
     { key: "market", Icon: IconMarket },
     { key: "inputs", Icon: IconInputs },
     { key: "warrantage", Icon: IconWarehouse },
     { key: "cooperatives", Icon: IconCooperative },
-    { key: "advisory", Icon: IconAdvisory },
     { key: "soil", Icon: IconSoil },
+    { key: "reliability", Icon: IconShield },
   ] as const;
 
   return (

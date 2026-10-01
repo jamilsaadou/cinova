@@ -1,3 +1,4 @@
+import { AttachmentCard } from "@/components/AttachmentCard";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -21,7 +22,7 @@ export default async function EvaluerPage({
   const jury = await requireJury();
 
   const [team, criteria, existing] = await Promise.all([
-    getTeamForJury(id),
+    getTeamForJury(id, jury.id),
     getCriteria(),
     getMyEvaluation(jury.id, id),
   ]);
@@ -32,6 +33,7 @@ export default async function EvaluerPage({
   const tCh = await getTranslations("challenges");
   const tRoles = await getTranslations("memberRoles");
   const tBen = await getTranslations("beneficiaries");
+  const tHeard = await getTranslations("heardAbout");
 
   const challengeName = team.challenge?.code
     ? tCh(`items.${CHALLENGE_CODE_TO_KEY[team.challenge.code] ?? "alert"}.title`)
@@ -74,11 +76,11 @@ export default async function EvaluerPage({
                   {team.members.map((m) => `${m.fullName} (${tRoles(m.role)})`).join(" · ")}
                 </p>
               </div>
+              <div><p className="text-xs uppercase text-muted">{tp("heardAbout")}</p><p className="text-sm">{team.heardAbout ? tHeard(team.heardAbout) : "—"}</p></div>
               {team.attachments.length > 0 && (
                 <div className="grid grid-cols-3 gap-2">
                   {team.attachments.map((a) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img key={a.id} src={`/api/attachments/${a.id}`} alt={a.filename} className="aspect-video w-full rounded-lg border border-sand object-cover" />
+                    <AttachmentCard key={a.id} attachment={a} />
                   ))}
                 </div>
               )}

@@ -1,3 +1,4 @@
+import { requireBackoffice } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAuditLogsPaged, AUDIT_ACTIONS } from "@/lib/audit";
@@ -27,6 +28,7 @@ export default async function LogsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireBackoffice();
   const sp = await searchParams;
 
   const paged = await getAuditLogsPaged({ action: sp.action, page: Number(sp.page) || 1 });

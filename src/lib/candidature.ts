@@ -20,7 +20,7 @@ export function getMyTeam(userId: string) {
       challenge: true,
       edition: true,
       attachments: {
-        select: { id: true, filename: true },
+        select: { id: true, filename: true, mimeType: true, size: true },
         orderBy: { createdAt: "asc" },
       },
     },
@@ -60,11 +60,13 @@ export function computeSteps(
 
 // Code de défi -> clé de traduction (messages challenges.items.*)
 export const CHALLENGE_CODE_TO_KEY: Record<string, string> = {
+  AGROECOLOGY: "agroecology",
+  ADVISORY: "advisory",
   ALERT: "alert",
   MARKET: "market",
   INPUTS: "inputs",
   WARRANTAGE: "warrantage",
   COOP: "cooperatives",
-  ADVISORY: "advisory",
   SOIL: "soil",
+  RELIABILITY: "reliability",
 };

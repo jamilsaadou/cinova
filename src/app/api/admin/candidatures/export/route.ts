@@ -5,7 +5,7 @@ import { listTeams, type TeamFilters } from "@/lib/admin";
 // Export CSV des candidatures (filtres via querystring). Réservé à l'admin.
 export async function GET(req: NextRequest) {
   const session = await auth();
-  if (!session?.user?.id || session.user.role !== "ADMIN") {
+  if (!session?.user?.id || !["ADMIN", "AUDITOR"].includes(session.user.role)) {
     return new Response("Forbidden", { status: 403 });
   }
 
@@ -30,6 +30,9 @@ export async function GET(req: NextRequest) {
     "Statut",
     "Membres",
     "Déposé le",
+    "Bénéficiaires visés",
+    "Canal de découverte",
+    "Pièces jointes",
   ];
   const cell = (v: unknown) => {
     const s = v == null ? "" : String(v);
@@ -48,6 +51,9 @@ export async function GET(req: NextRequest) {
         t.status,
         t._count.members,
         t.submittedAt ? t.submittedAt.toISOString().slice(0, 10) : "",
+        t.beneficiaries ?? "",
+        t.heardAbout ?? "",
+        t._count.attachments,
       ]
         .map(cell)
         .join(","),

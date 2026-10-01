@@ -1,5 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { requireAdmin } from "@/lib/admin";
+import { requireBackoffice } from "@/lib/admin";
 import { AdminChrome } from "@/components/admin/AdminChrome";
 
 export default async function AdminLayout({
@@ -11,10 +11,10 @@ export default async function AdminLayout({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const user = await requireAdmin();
+  const user = await requireBackoffice();
 
   return (
-    <AdminChrome user={{ name: user.name ?? null, email: user.email ?? null }}>
+    <AdminChrome user={{ name: user.name ?? null, email: user.email ?? null, role: user.role }}>
       {children}
     </AdminChrome>
   );

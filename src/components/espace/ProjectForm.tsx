@@ -21,7 +21,7 @@ import {
 const TRACKS = ["CREATION", "ADAPTATION"] as const;
 const CODE_TO_KEY: Record<string, string> = {
   ALERT: "alert", MARKET: "market", INPUTS: "inputs", WARRANTAGE: "warrantage",
-  COOP: "cooperatives", ADVISORY: "advisory", SOIL: "soil",
+  COOP: "cooperatives", ADVISORY: "advisory", SOIL: "soil", AGROECOLOGY: "agroecology", RELIABILITY: "reliability",
 };
 
 type Props = {

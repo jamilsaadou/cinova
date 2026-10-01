@@ -1,3 +1,4 @@
+import { requireBackoffice } from "@/lib/admin";
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getRanking } from "@/lib/ranking";
@@ -16,6 +17,7 @@ export default async function AdminClassementPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireBackoffice();
   const sp = await searchParams;
 
   const [rows, edition] = await Promise.all([getRanking(sp), getActiveEdition()]);

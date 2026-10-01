@@ -14,7 +14,7 @@ export function Header() {
   const authed = status === "authenticated";
   const role = sessionData?.user?.role;
   const primary =
-    role === "ADMIN"
+    (role === "ADMIN" || role === "AUDITOR")
       ? { href: "/admin", label: t("admin.menu") }
       : role === "JURY"
         ? { href: "/jury", label: t("juryspace.title") }

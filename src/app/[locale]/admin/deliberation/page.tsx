@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getDeliberation } from "@/lib/deliberation";
@@ -19,6 +20,7 @@ export default async function DeliberationPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireAdmin();
   const sp = await searchParams;
 
   const { groups, edition, published } = await getDeliberation();

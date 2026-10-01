@@ -1,3 +1,4 @@
+import { participationIndicators } from "@/lib/participation-indicators";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -12,6 +13,14 @@ export async function requireAdmin() {
   const session = await auth();
   if (!session?.user?.id) redirect("/login");
   if (session.user.role !== "ADMIN") redirect("/espace");
+  return session.user;
+}
+
+// Accès de consultation uniquement : les actions d’écriture exigent requireAdmin.
+export async function requireBackoffice() {
+  const session = await auth();
+  if (!session?.user?.id) redirect("/login");
+  if (!["ADMIN", "AUDITOR"].includes(session.user.role)) redirect("/espace");
   return session.user;
 }
 
@@ -91,7 +100,7 @@ export function getTeamForAdmin(id: string) {
       challenge: true,
       edition: true,
       members: { orderBy: { createdAt: "asc" } },
-      attachments: { select: { id: true, filename: true }, orderBy: { createdAt: "asc" } },
+      attachments: { select: { id: true, filename: true, mimeType: true, size: true }, orderBy: { createdAt: "asc" } },
     },
   });
 }
@@ -152,7 +161,7 @@ export async function getStatsDetail() {
   const [base, teams, totalMembers] = await Promise.all([
     getAdminStats(),
     prisma.team.findMany({
-      select: { submittedAt: true, challenge: { select: { code: true } } },
+      select: { beneficiaries: true, heardAbout: true, submittedAt: true, challenge: { select: { code: true } } },
     }),
     prisma.teamMember.count(),
   ]);
@@ -181,5 +190,5 @@ export async function getStatsDetail() {
     timeline.push({ date: key, count: counts.get(key) ?? 0 });
   }
 
-  return { ...base, byChallenge, totalMembers, timeline };
+  return { ...base, byChallenge, totalMembers, timeline, ...participationIndicators(teams) };
 }

@@ -1,4 +1,36 @@
 {
+  "users": {
+    "title": "User management",
+    "subtitle": "Manage accounts and roles. Auditors can view applications, attachments, statistics and logs without editing them.",
+    "name": "Full name",
+    "email": "Email",
+    "role": "Profile type",
+    "password": "Initial password (at least 12 characters)",
+    "active": "Active account",
+    "create": "Create user",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "search": "Search by name or email",
+    "allRoles": "All profiles",
+    "filter": "Filter",
+    "count": "{count} user(s)",
+    "empty": "No users.",
+    "createHint": "The new account is verified and can sign in with this password. No email is sent automatically.",
+    "errors": {
+      "invalid": "Check the fields.",
+      "password": "Use at least 12 characters and at most 72 bytes.",
+      "self": "You cannot remove your own administrator access.",
+      "lastAdmin": "Keep at least one active administrator.",
+      "missing": "User not found.",
+      "duplicate": "This email is already in use.",
+      "failed": "Unable to save. Try again."
+    }
+  },
+  "files": {
+    "open": "Open",
+    "download": "Download"
+  },
   "actors": {
     "title": "Challenge stakeholders"
   },
@@ -102,9 +134,17 @@
   },
   "challenges": {
     "eyebrow": "The themes",
-    "title": "Seven challenges, three selected",
-    "subtitle": "Seven challenges are submitted to RECA's technical committee, which will retain at most three for this edition.",
+    "title": "Nine challenges, three selected",
+    "subtitle": "Nine challenges are submitted to RECA’s technical committee, which will retain at most three for this edition. Information reliability is a cross-cutting theme across all challenges.",
     "items": {
+      "agroecology": {
+        "title": "Agroecology",
+        "description": "Support the agroecological transition through digital tools: sustainable water management, biodiversity and sharing agroecological practices."
+      },
+      "advisory": {
+        "title": "Agricultural advisory",
+        "description": "Amplify the reach of advice produced by the consular network."
+      },
       "alert": {
         "title": "Early warning",
         "description": "Deliver plant-health and climate alerts to the producer on time."
@@ -125,13 +165,13 @@
         "title": "Cooperative management",
         "description": "Equip the management of farmer organizations and cooperatives."
       },
-      "advisory": {
-        "title": "Agricultural advisory",
-        "description": "Amplify the reach of advice produced by the consular network."
-      },
       "soil": {
         "title": "Soil fertility",
         "description": "Support fertilization decisions and soil management."
+      },
+      "reliability": {
+        "title": "Information reliability",
+        "description": "Cross-cutting theme: verify sources, keep data up to date and counter misinformation to support informed agricultural decisions."
       }
     }
   },
@@ -301,7 +341,8 @@
     "CANDIDATE": "Applicant / Team lead",
     "ADMIN": "Administrator",
     "JURY": "Jury member",
-    "REGIONAL_RELAY": "Regional Chamber relay"
+    "REGIONAL_RELAY": "Regional Chamber relay",
+    "AUDITOR": "Auditor (read only)"
   },
   "regions": {
     "AGADEZ": "Agadez",
@@ -453,12 +494,12 @@
       "otherInfo": "Other relevant information",
       "otherInfoHint": "Anything useful for your application.",
       "selectedPreview": "Selected images (preview)",
-      "attachmentsTitle": "Project images",
-      "attachmentsSubtitle": "Add screenshots of your app or any relevant visuals (PNG, JPG, WebP, GIF · 4 MB max · 6 images max).",
-      "uploadBtn": "Add an image",
+      "attachmentsTitle": "Project attachments",
+      "attachmentsSubtitle": "Add photos, screenshots or PDF documents (PNG, JPG, WebP, GIF, PDF · 4 MB per file · up to 6 files).",
+      "uploadBtn": "Add files",
       "uploading": "Uploading…",
-      "removeImage": "Remove",
-      "noImages": "No images yet.",
+      "removeImage": "Remove file",
+      "noImages": "No attachments.",
       "submitTitle": "Submit the application",
       "submitText": "Check that the project name, a challenge and at least 2 members are set.",
       "acceptPre": "I have read and accept the",
@@ -470,9 +511,9 @@
       "lockedInfo": "Your application is submitted: editing disabled.",
       "errors": {
         "no_file": "No file selected.",
-        "bad_type": "Unsupported format (images only).",
-        "too_big": "Image too large (4 MB max).",
-        "too_many": "Maximum number of images reached.",
+        "bad_type": "Invalid format. Accepted: PNG, JPG, WebP, GIF and PDF.",
+        "too_big": "File too large (4 MB maximum).",
+        "too_many": "Up to 6 files.",
         "confirm": "Tick the rules confirmation and the final confirmation.",
         "incomplete": "Complete the project name, the challenge and at least 2 members.",
         "locked": "Application already submitted.",
@@ -675,7 +716,8 @@
       "JURY_SCORE": "Jury evaluation",
       "ASSIGN": "Jury assignment",
       "PUBLISH": "Results published",
-      "DELETE": "Deletion"
+      "DELETE": "Deletion",
+      "USER_MANAGEMENT": "User management"
     },
     "dangerTitle": "Danger zone",
     "dangerHint": "These actions are irreversible.",
@@ -740,7 +782,11 @@
     "quotaTargetLabel": "Target: {n} / region",
     "quotaSubtitle": "Target number of submitted applications per region (0 = disabled).",
     "quotaTargetField": "Target per region",
-    "saveQuota": "Save quota"
+    "saveQuota": "Save quota",
+    "navUsers": "User management",
+    "auditorSpace": "Auditor (read only)",
+    "unanswered": "Not provided",
+    "beneficiaryHint": "Applications per target audience, including drafts. Multiple choices are allowed; one application can appear in several categories."
   },
   "juryAdmin": {
     "eyebrow": "Administration",

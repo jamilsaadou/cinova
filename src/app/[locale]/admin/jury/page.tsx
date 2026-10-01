@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getJuryOverview } from "@/lib/jury";
@@ -16,6 +17,7 @@ export default async function AdminJuryPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireAdmin();
 
   const { jurors, teams, juryCount, eligibleCount } = await getJuryOverview();
 

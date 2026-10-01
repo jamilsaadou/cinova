@@ -25,6 +25,9 @@ export async function saveEvaluationAction(formData: FormData) {
     redirect(`/${locale}/jury`);
   }
 
+  const assignments = await prisma.assignment.findMany({ where: { teamId }, select: { juryId: true } });
+  if (assignments.length && !assignments.some((a) => a.juryId === juryId)) redirect(`/${locale}/jury`);
+
   const criteria = await prisma.criterion.findMany({ where: { isActive: true } });
 
   // Brouillon vs soumission : un brouillon n'est pas compté dans l'agrégation.

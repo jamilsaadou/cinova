@@ -6,13 +6,15 @@ import { seedAdmin } from "./seed-admin.mjs";
 const prisma = new PrismaClient();
 
 const CHALLENGES = [
-  { code: "ALERT", title: "Alerte précoce", order: 1 },
-  { code: "MARKET", title: "Information de marché", order: 2 },
-  { code: "INPUTS", title: "Traçabilité des intrants", order: 3 },
-  { code: "WARRANTAGE", title: "Warrantage", order: 4 },
-  { code: "COOP", title: "Gestion des coopératives", order: 5 },
-  { code: "ADVISORY", title: "Valorisation du conseil agricole", order: 6 },
-  { code: "SOIL", title: "Fertilité des sols", order: 7 },
+  { code: "AGROECOLOGY", title: "Agroécologie", order: 1 },
+  { code: "ADVISORY", title: "Valorisation du conseil agricole", order: 2 },
+  { code: "ALERT", title: "Alerte précoce", order: 3 },
+  { code: "MARKET", title: "Information de marché", order: 4 },
+  { code: "INPUTS", title: "Traçabilité des intrants", order: 5 },
+  { code: "WARRANTAGE", title: "Warrantage", order: 6 },
+  { code: "COOP", title: "Gestion des coopératives", order: 7 },
+  { code: "SOIL", title: "Fertilité des sols", order: 8 },
+  { code: "RELIABILITY", title: "Fiabilité de l’information", order: 9 },
 ];
 
 async function main() {

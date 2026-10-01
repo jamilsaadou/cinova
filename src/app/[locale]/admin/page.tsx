@@ -1,3 +1,4 @@
+import { requireBackoffice } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { listTeams, getAdminStats, getRegionQuota } from "@/lib/admin";
@@ -21,6 +22,7 @@ export default async function AdminDashboard({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireBackoffice();
 
   const [stats, recent, quota] = await Promise.all([
     getAdminStats(),

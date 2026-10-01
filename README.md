@@ -61,6 +61,7 @@ dans l'environnement ou dans `.env`, exécuter dans Bash :
 ```bash
 git pull --ff-only origin main
 npm ci
+npx prisma migrate deploy
 npx prisma generate
 read -r -p "Email administrateur : " ADMIN_EMAIL
 read -r -s -p "Mot de passe (12 caractères minimum) : " ADMIN_PASSWORD
@@ -70,7 +71,7 @@ npm run db:seed
 unset ADMIN_EMAIL ADMIN_PASSWORD
 ```
 
-Le seed initialise l’édition et ses sept défis, puis permet de disposer d’un
+Le seed initialise l’édition et ses neuf défis, puis permet de disposer d’un
 compte administrateur avec un email validé. Sans variables `ADMIN_EMAIL` et
 `ADMIN_PASSWORD`, il initialise uniquement l’édition et les défis.
 La commande `npm run admin:create` reste disponible pour gérer uniquement
@@ -78,6 +79,35 @@ l’administrateur. Si le compte
 existe déjà avec un mot de passe, elle le promeut administrateur et conserve
 son mot de passe actuel. Se reconnecter sur `/login`, puis ouvrir `/admin`.
 Le mot de passe saisi n'est pas affiché et ne figure pas dans l'historique Bash.
+
+## Mise à jour du VPS
+
+Appliquer les migrations avant de redémarrer la nouvelle version :
+
+```bash
+git pull --ff-only origin main
+npm ci
+npx prisma migrate deploy
+npx prisma generate
+npm run build
+```
+
+Redémarrer ensuite le service CINOVA avec le gestionnaire de processus du VPS.
+Les migrations ajoutent les thèmes et le profil auditeur sans supprimer les candidatures.
+
+## Gestion et consultation
+
+La page `/fr/admin/utilisateurs` permet aux administrateurs de créer des comptes,
+modifier les profils et activer ou désactiver un accès. Un administrateur ne peut
+pas retirer son propre accès ni celui du dernier administrateur actif.
+Les auditeurs consultent les candidatures, statistiques, exports et journaux sans
+pouvoir les modifier. Les jurés consultent les dossiers admissibles qui leur sont
+accessibles selon les affectations. Les relais régionaux conservent leurs accès existants.
+
+Les statistiques incluent les bénéficiaires visés et les canaux de découverte du
+challenge. Les pièces jointes acceptent les images et PDF (6 fichiers, 4 Mo chacun),
+avec consultation et téléchargement réservés aux utilisateurs autorisés.
+Exécuter `npm test` pour vérifier les indicateurs, fichiers et contrôles d’accès.
 
 ## Structure
 
@@ -96,7 +126,7 @@ scripts/pg.sh          # Gestion du cluster PostgreSQL local
 
 ## Modèle de données (schéma initial)
 
-- **User** — comptes + rôles : `CANDIDATE`, `ADMIN`, `JURY`, `REGIONAL_RELAY` (+ modèles Auth.js).
+- **User** — comptes + rôles : `CANDIDATE`, `ADMIN`, `JURY`, `AUDITOR`, `REGIONAL_RELAY` (+ modèles Auth.js).
 - **Team** — une candidature = une équipe (piste création/adaptation, statut, région).
 - **TeamMember** — membres renseignés par le chef d'équipe.
 - **Edition / Challenge** — édition du challenge et ses défis.

@@ -19,6 +19,7 @@ datasource db {
 
 enum UserRole {
   CANDIDATE // Candidat / chef d'équipe
+  AUDITOR // Consultation en lecture seule
   ADMIN // Comité technique / RECA
   JURY // Membre du jury
   REGIONAL_RELAY // Relais Chambre Régionale d'Agriculture (CRA)
@@ -88,6 +89,7 @@ model User {
   image         String?
   passwordHash  String? // Auth par email + mot de passe (bcrypt)
 
+  isActive     Boolean      @default(true)
   role         UserRole     @default(CANDIDATE)
   gender       Gender?
   region       NigerRegion?

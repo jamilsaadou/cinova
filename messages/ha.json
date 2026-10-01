@@ -1,4 +1,36 @@
 {
+  "users": {
+    "title": "Gudanar da masu amfani",
+    "subtitle": "Sarrafa asusu da nau’in mai amfani. Masu dubawa suna iya duba aikace-aikace, fayiloli, ƙididdiga da rajista ba tare da gyara su ba.",
+    "name": "Cikakken suna",
+    "email": "Imel",
+    "role": "Nau’in mai amfani",
+    "password": "Kalmar sirri ta farko (haruffa 12 aƙalla)",
+    "active": "Asusu mai aiki",
+    "create": "Ƙirƙiri mai amfani",
+    "save": "Ajiye",
+    "saving": "Ana ajiyewa…",
+    "saved": "An ajiye canje-canje.",
+    "search": "Nema da suna ko imel",
+    "allRoles": "Dukkan nau’uka",
+    "filter": "Tace",
+    "count": "Masu amfani: {count}",
+    "empty": "Babu mai amfani.",
+    "createHint": "An tabbatar da sabon asusun kuma zai iya shiga da wannan kalmar sirri. Ba a aika imel ta atomatik.",
+    "errors": {
+      "invalid": "Duba bayanan da aka shigar.",
+      "password": "A yi amfani da haruffa 12 aƙalla, bai wuce bait 72 ba.",
+      "self": "Ba za ka iya cire ikon gudanarwarka ba.",
+      "lastAdmin": "Dole ne a bar mai gudanarwa guda ɗaya mai aiki.",
+      "missing": "Ba a sami mai amfani ba.",
+      "duplicate": "Ana amfani da wannan imel.",
+      "failed": "Ba a iya ajiyewa ba. Sake gwadawa."
+    }
+  },
+  "files": {
+    "open": "Buɗe",
+    "download": "Sauke"
+  },
   "actors": {
     "title": "Masu ruwa da tsaki a gasar"
   },
@@ -102,9 +134,17 @@
   },
   "challenges": {
     "eyebrow": "Jigogi",
-    "title": "Ƙalubale bakwai, uku za a zaɓa",
-    "subtitle": "An gabatar da ƙalubale bakwai ga kwamitin fasaha na RECA, wanda zai zaɓi uku a mafi yawa don wannan bugu.",
+    "title": "Ƙalubale tara, uku za a zaɓa",
+    "subtitle": "An gabatar da ƙalubale tara ga kwamitin fasaha na RECA, wanda zai zaɓi uku a mafi yawa don wannan bugu. Sahihancin bayanai jigo ne da ya shafi dukkan ƙalubalen.",
     "items": {
+      "agroecology": {
+        "title": "Noma mai kiyaye muhalli",
+        "description": "Tallafa wa sauyin noma mai kiyaye muhalli ta fasahar dijital: kula da ruwa yadda ya kamata, bambancin halittu da musayar dabarun noma mai kiyaye muhalli."
+      },
+      "advisory": {
+        "title": "Shawarar noma",
+        "description": "Faɗaɗa isar da shawarar da hanyar sadarwa ta majalisu ke samarwa."
+      },
       "alert": {
         "title": "Gargaɗin wuri-wuri",
         "description": "Isar da gargaɗin lafiyar shuke-shuke da yanayi ga manomi a kan lokaci."
@@ -125,13 +165,13 @@
         "title": "Sarrafa ƙungiyoyin haɗin kai",
         "description": "Ba da kayan aiki don sarrafa ƙungiyoyin manoma da haɗin kai."
       },
-      "advisory": {
-        "title": "Shawarar noma",
-        "description": "Faɗaɗa isar da shawarar da hanyar sadarwa ta majalisu ke samarwa."
-      },
       "soil": {
         "title": "Wadatar ƙasa",
         "description": "Taimakawa yanke shawara kan taki da sarrafa ƙasa."
+      },
+      "reliability": {
+        "title": "Sahihancin bayanai",
+        "description": "Jigo da ya shafi dukkan ƙalubalen: tantance tushen bayanai, sabunta su da yaƙar bayanan ƙarya domin yanke shawarar noma bisa ingantattun bayanai."
       }
     }
   },
@@ -301,7 +341,8 @@
     "CANDIDATE": "Ɗan takara / Shugaban ƙungiya",
     "ADMIN": "Manaja",
     "JURY": "Memba na alƙalai",
-    "REGIONAL_RELAY": "Wakilin Majalisar Yanki"
+    "REGIONAL_RELAY": "Wakilin Majalisar Yanki",
+    "AUDITOR": "Mai dubawa (karantawa kawai)"
   },
   "regions": {
     "AGADEZ": "Agadez",
@@ -453,12 +494,12 @@
       "otherInfo": "Wani ƙarin bayani mai amfani",
       "otherInfoHint": "Duk abin da zai amfani bukatarka.",
       "selectedPreview": "Hotunan da aka zaɓa (samfoti)",
-      "attachmentsTitle": "Hotunan aikin",
-      "attachmentsSubtitle": "Ƙara hotunan allo na manhajarka ko duk wani hoto mai amfani (PNG, JPG, WebP, GIF · 4 MB max · hotuna 6 max).",
-      "uploadBtn": "Ƙara hoto",
+      "attachmentsTitle": "Fayilolin aikin",
+      "attachmentsSubtitle": "Ƙara hotuna ko takardun PDF (PNG, JPG, WebP, GIF, PDF · 4 MB ga kowane fayil · fayiloli 6 a iyaka).",
+      "uploadBtn": "Ƙara fayiloli",
       "uploading": "Ana aikawa…",
-      "removeImage": "Cire",
-      "noImages": "Babu hotuna tukuna.",
+      "removeImage": "Goge fayil",
+      "noImages": "Babu fayil.",
       "submitTitle": "Gabatar da bukata",
       "submitText": "Tabbatar an cika sunan aikin, ƙalubale da aƙalla membobi 2.",
       "acceptPre": "Na karanta kuma na amince da",
@@ -470,9 +511,9 @@
       "lockedInfo": "An gabatar da bukatarka: an kashe gyara.",
       "errors": {
         "no_file": "Ba a zaɓi fayil ba.",
-        "bad_type": "Tsari mara tallafi (hotuna kaɗai).",
-        "too_big": "Hoton ya yi nauyi sosai (4 MB max).",
-        "too_many": "An kai iyakar hotuna.",
+        "bad_type": "Tsarin fayil bai dace ba. Ana karɓar PNG, JPG, WebP, GIF da PDF.",
+        "too_big": "Fayil ya yi girma (4 MB a iyaka).",
+        "too_many": "Fayiloli 6 a iyaka.",
         "confirm": "Duba karanta ƙa'idoji da tabbatarwa.",
         "incomplete": "Cika sunan aikin, ƙalubale da aƙalla membobi 2.",
         "locked": "An riga an gabatar da bukata.",
@@ -675,7 +716,8 @@
       "JURY_SCORE": "Ƙimar alƙalai",
       "ASSIGN": "Ba da aiki ga alƙali",
       "PUBLISH": "Buga sakamako",
-      "DELETE": "Sharewa"
+      "DELETE": "Sharewa",
+      "USER_MANAGEMENT": "Gudanar da masu amfani"
     },
     "dangerTitle": "Yankin haɗari",
     "dangerHint": "Waɗannan ayyuka ba za a iya juyar da su ba.",
@@ -740,7 +782,11 @@
     "quotaTargetLabel": "Manufa: {n} / yanki",
     "quotaSubtitle": "Adadin buƙatun da aka gabatar ga kowane yanki (0 = kashe).",
     "quotaTargetField": "Manufa ga kowane yanki",
-    "saveQuota": "Ajiye kaso"
+    "saveQuota": "Ajiye kaso",
+    "navUsers": "Gudanar da masu amfani",
+    "auditorSpace": "Mai dubawa (karantawa kawai)",
+    "unanswered": "Ba a bayar ba",
+    "beneficiaryHint": "Adadin aikace-aikace bisa rukunin masu amfana, har da daftari. Ana iya zaɓar rukuni fiye da ɗaya."
   },
   "juryAdmin": {
     "eyebrow": "Gudanarwa",

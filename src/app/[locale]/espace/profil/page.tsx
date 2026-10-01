@@ -42,6 +42,7 @@ export default async function ProfilPage({
   const tInd = await getTranslations("espace.indicators");
   const steps = computeSteps(user, team);
   const daysLeft = edition?.applicationsCloseAt
+    // eslint-disable-next-line react-hooks/purity -- Page serveur dynamique : échéance calculée à chaque requête.
     ? Math.max(0, Math.ceil((edition.applicationsCloseAt.getTime() - Date.now()) / 86_400_000))
     : null;
 

@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const email = parsed.data.email.toLowerCase();
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user?.passwordHash) return null;
+        if (!user?.isActive || !user.passwordHash) return null;
 
         const ok = await bcrypt.compare(parsed.data.password, user.passwordHash);
         if (!ok) return null;
@@ -53,10 +53,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id as string;
         token.role = (user as { role: UserRole }).role;
+      }
+      // Les droits et désactivations prennent effet sur les sessions déjà ouvertes.
+      if (typeof token.id === "string") {
+        const current = await prisma.user.findUnique({
+          where: { id: token.id },
+          select: { role: true, isActive: true, name: true, email: true },
+        });
+        if (!current?.isActive) return null;
+        token.role = current.role;
+        token.name = current.name;
+        token.email = current.email;
       }
       return token;
     },

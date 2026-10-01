@@ -1,3 +1,5 @@
+import { BENEFICIARY_KEYS, HEARD_ABOUT_KEYS } from "@/lib/candidature-options";
+import { requireBackoffice } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getStatsDetail } from "@/lib/admin";
@@ -14,7 +16,7 @@ export const dynamic = "force-dynamic";
 const REGIONS = [
   "AGADEZ", "DIFFA", "DOSSO", "MARADI", "NIAMEY", "TAHOUA", "TILLABERI", "ZINDER",
 ] as const;
-const CHALLENGE_CODES = ["ALERT", "MARKET", "INPUTS", "WARRANTAGE", "COOP", "ADVISORY", "SOIL"] as const;
+const CHALLENGE_CODES = ["AGROECOLOGY", "ADVISORY", "ALERT", "MARKET", "INPUTS", "WARRANTAGE", "COOP", "SOIL", "RELIABILITY"] as const;
 const STATUS_LIST = ["SUBMITTED", "UNDER_REVIEW", "PRESELECTED", "REJECTED", "FINALIST", "WINNER"] as const;
 
 const COUNTRY_NAMES: Record<string, string> = {
@@ -50,6 +52,7 @@ export default async function StatsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireBackoffice();
 
   const [stats, visits] = await Promise.all([getStatsDetail(), getVisitStats()]);
   const t = await getTranslations("admin");
@@ -57,6 +60,9 @@ export default async function StatsPage({
   const tRegions = await getTranslations("regions");
   const tTracks = await getTranslations("tracks");
   const tCh = await getTranslations("challenges");
+  const tb = await getTranslations("beneficiaries");
+  const th = await getTranslations("heardAbout");
+  const tp = await getTranslations("espace.projet");
   const tGenders = await getTranslations("genders");
 
   const countryLabel = (code: string) =>
@@ -163,6 +169,13 @@ export default async function StatsPage({
         </Reveal>
       </div>
 
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        <Card title={tp("beneficiaries")}>
+          <p className="mb-3 text-xs text-muted">{t("beneficiaryHint")}</p>
+          <Breakdown title={tp("beneficiaries")} entries={[...BENEFICIARY_KEYS.map((key): [string, number] => [tb(key), stats.byBeneficiary[key] ?? 0]), [t("unanswered"), stats.missingBeneficiaries]]} />
+        </Card>
+        <Breakdown title={tp("heardAbout")} entries={[...HEARD_ABOUT_KEYS.map((key): [string, number] => [th(key), stats.byHeardAbout[key] ?? 0]), [t("unanswered"), stats.missingHeardAbout]]} />
+      </div>
       {/* Donuts + répartitions */}
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <Reveal delay={200}>

@@ -45,13 +45,15 @@ export function getTeamsToEvaluate(
   });
 }
 
-export function getTeamForJury(id: string) {
-  return prisma.team.findUnique({
-    where: { id },
+export function getTeamForJury(id: string, juryId: string) {
+  return prisma.team.findFirst({
+    where: { id, status: { in: ["PRESELECTED", "FINALIST"] }, OR: [
+      { assignments: { none: {} } }, { assignments: { some: { juryId } } },
+    ] },
     include: {
       challenge: true,
       members: { orderBy: { createdAt: "asc" } },
-      attachments: { select: { id: true, filename: true } },
+      attachments: { select: { id: true, filename: true, mimeType: true, size: true } },
     },
   });
 }
@@ -71,7 +73,7 @@ export async function getMyEvaluation(juryId: string, teamId: string) {
 export async function getJuryOverview() {
   const [jurors, teams] = await Promise.all([
     prisma.user.findMany({
-      where: { role: "JURY" },
+      where: { role: "JURY", isActive: true },
       select: { id: true, name: true, email: true },
       orderBy: { name: "asc" },
     }),

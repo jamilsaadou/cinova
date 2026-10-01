@@ -37,10 +37,12 @@ type Labels = {
 };
 
 export function CandidaturesTable({
+  readOnly = false,
   rows,
   statusOptions,
   labels,
 }: {
+  readOnly?: boolean;
   rows: Row[];
   statusOptions: { value: string; label: string }[];
   labels: Labels;
@@ -52,7 +54,8 @@ export function CandidaturesTable({
   const toggle = (id: string) =>
     setSelected((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   const toggleAll = () =>
@@ -66,7 +69,7 @@ export function CandidaturesTable({
       ))}
 
       {/* Barre d'action groupée */}
-      {selected.size > 0 && (
+      {!readOnly && selected.size > 0 && (
         <div className="mb-3 flex flex-wrap items-center gap-3 rounded-2xl border border-green/40 bg-green/5 p-3">
           <span className="text-sm font-semibold text-forest-700">
             {selected.size} {labels.selected}
@@ -105,6 +108,7 @@ export function CandidaturesTable({
                 <th className="px-4 py-3">
                   <input
                     type="checkbox"
+                    disabled={readOnly}
                     checked={allChecked}
                     onChange={toggleAll}
                     aria-label="tout"
@@ -129,6 +133,7 @@ export function CandidaturesTable({
                   <td className="px-4 py-3">
                     <input
                       type="checkbox"
+                      disabled={readOnly}
                       checked={selected.has(r.id)}
                       onChange={() => toggle(r.id)}
                       className="h-4 w-4 accent-green"

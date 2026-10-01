@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { Logo } from "@/components/Logo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import {
+  IconUsers,
   IconGrid,
   IconDocument,
   IconMarket,
@@ -29,6 +30,7 @@ type NavItem = {
 };
 
 const NAV: NavItem[] = [
+  { href: "/admin/utilisateurs", labelKey: "navUsers", Icon: IconUsers },
   { href: "/admin", labelKey: "navDashboard", Icon: IconGrid },
   { href: "/admin/statistiques", labelKey: "navStats", Icon: IconMarket },
   { href: "/admin/candidatures", labelKey: "navApplications", Icon: IconDocument },
@@ -43,7 +45,7 @@ export function AdminChrome({
   user,
   children,
 }: {
-  user: { name: string | null; email: string | null };
+  user: { name: string | null; email: string | null; role: string };
   children: React.ReactNode;
 }) {
   const t = useTranslations("admin");
@@ -58,7 +60,7 @@ export function AdminChrome({
 
   const navList = (
     <nav className="flex-1 space-y-1 px-3">
-      {NAV.map((item) => {
+      {NAV.filter((item) => user.role === "ADMIN" || ["/admin", "/admin/statistiques", "/admin/candidatures", "/admin/classement", "/admin/logs"].includes(item.href)).map((item) => {
         const active = isActive(item.href);
         const content = (
           <>
@@ -102,7 +104,7 @@ export function AdminChrome({
     <div className="flex h-full flex-col bg-forest py-5 text-cream-100">
       <div className="mb-6 px-5">
         <Logo variant="white" className="h-9 w-auto" />
-        <p className="mt-2 text-xs uppercase tracking-widest text-sage">{t("eyebrow")}</p>
+        <p className="mt-2 text-xs uppercase tracking-widest text-sage">{user.role === "AUDITOR" ? t("auditorSpace") : t("eyebrow")}</p>
       </div>
 
       {navList}

@@ -76,7 +76,7 @@ export async function autoAssignAction(formData: FormData) {
 
   const [teams, jurors] = await Promise.all([
     prisma.team.findMany({ where: { status: { in: [...EVAL_STATUSES] } }, select: { id: true } }),
-    prisma.user.findMany({ where: { role: "JURY" }, select: { id: true }, orderBy: { createdAt: "asc" } }),
+    prisma.user.findMany({ where: { role: "JURY", isActive: true }, select: { id: true }, orderBy: { createdAt: "asc" } }),
   ]);
 
   if (mode === "clear") {

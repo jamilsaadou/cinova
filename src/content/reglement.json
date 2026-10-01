@@ -1,6 +1,6 @@
 {
   "version": "Version de travail 0.1",
-  "updated": "2026-08-28",
+  "updated": "2026-10-01",
   "articles": [
     {
       "id": "objet",
@@ -47,7 +47,7 @@
       "id": "defis",
       "title": "Article 5 — Défis et jeux de données",
       "paragraphs": [
-        "Sept défis sont soumis au comité technique du RECA, qui en retient trois au maximum pour l'édition : alerte précoce, information de marché, traçabilité des intrants, warrantage, gestion des coopératives, valorisation du conseil agricole et fertilité des sols.",
+        "Neuf défis sont proposés au comité technique du RECA (trois retenus au maximum) : agroécologie, valorisation du conseil agricole, alerte précoce, information de marché, traçabilité des intrants, warrantage, gestion des coopératives, fertilité des sols et fiabilité de l’information. Ce thème transversal couvre les sources, l’actualisation des données et la lutte contre la désinformation.",
         "Les jeux de données mis à disposition, leur format et leurs limites sont présentés lors des webinaires et publiés avec l'appel à candidatures."
       ]
     },

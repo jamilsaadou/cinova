@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/admin";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
@@ -35,6 +36,7 @@ export default async function ParametresPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  await requireAdmin();
   const sp = await searchParams;
 
   const [edition, smtp, criteria, quotaTarget, logsCount, visitsCount] = await Promise.all([

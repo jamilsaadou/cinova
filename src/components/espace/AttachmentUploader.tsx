@@ -7,10 +7,11 @@ import {
   deleteAttachmentAction,
   type FormState,
 } from "@/lib/candidature-actions";
+import { AttachmentCard } from "@/components/AttachmentCard";
 import { IconDownload } from "@/components/icons";
 
-type Att = { id: string; filename: string };
-type Preview = { url: string; name: string };
+type Att = { id: string; filename: string; mimeType: string; size: number };
+type Preview = { url: string; name: string; mimeType: string };
 const initial: FormState = { status: "idle" };
 
 export function AttachmentUploader({
@@ -23,25 +24,24 @@ export function AttachmentUploader({
   const t = useTranslations("espace.projet");
   const te = useTranslations("espace.projet.errors");
   const locale = useLocale();
-  const [state, action, pending] = useActionState(uploadAttachmentAction, initial);
   const [previews, setPreviews] = useState<Preview[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
+  const [state, action, pending] = useActionState(async (previous: FormState, data: FormData) => {
+    const result = await uploadAttachmentAction(previous, data);
+    if (result.status === "success") {
+      setPreviews([]);
+      formRef.current?.reset();
+    }
+    return result;
+  }, initial);
+
 
   // Aperçus locaux dès la sélection des fichiers.
   function onSelect(e: React.ChangeEvent<HTMLInputElement>) {
     previews.forEach((p) => URL.revokeObjectURL(p.url));
     const files = Array.from(e.target.files ?? []);
-    setPreviews(files.map((f) => ({ url: URL.createObjectURL(f), name: f.name })));
+    setPreviews(files.map((f) => ({ url: URL.createObjectURL(f), name: f.name, mimeType: f.type })));
   }
-
-  useEffect(() => {
-    if (state.status === "success") {
-      previews.forEach((p) => URL.revokeObjectURL(p.url));
-      setPreviews([]);
-      formRef.current?.reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
 
   useEffect(() => () => previews.forEach((p) => URL.revokeObjectURL(p.url)), [previews]);
 
@@ -52,18 +52,13 @@ export function AttachmentUploader({
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {attachments.map((a) => (
             <li key={a.id} className="group relative overflow-hidden rounded-xl border border-sand bg-cream">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/api/attachments/${a.id}`}
-                alt={a.filename}
-                className="aspect-video w-full object-cover"
-              />
+              <AttachmentCard attachment={a} />
               {!locked && (
                 <form action={deleteAttachmentAction} className="absolute right-1.5 top-1.5">
                   <input type="hidden" name="locale" value={locale} />
                   <input type="hidden" name="attachmentId" value={a.id} />
                   <button
-                    className="rounded-full bg-black/55 px-2 py-1 text-xs font-semibold text-white opacity-0 transition group-hover:opacity-100"
+                    className="rounded-full bg-black/55 px-2 py-1 text-xs font-semibold text-white transition hover:bg-black/75"
                     title={t("removeImage")}
                   >
                     ✕
@@ -82,7 +77,7 @@ export function AttachmentUploader({
           <input
             name="file"
             type="file"
-            accept="image/png,image/jpeg,image/webp,image/gif"
+            accept="image/png,image/jpeg,image/webp,image/gif,application/pdf"
             multiple
             required
             onChange={onSelect}
@@ -97,7 +92,8 @@ export function AttachmentUploader({
                 {previews.map((p, i) => (
                   <li key={i} className="overflow-hidden rounded-xl border border-green/40 bg-cream">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.url} alt={p.name} className="aspect-video w-full object-cover" />
+                    {p.mimeType === "application/pdf" ? <div className="flex aspect-video items-center justify-center text-green">PDF</div> : <img src={p.url} alt={p.name} className="aspect-video w-full object-contain" />}
+                    <p className="truncate p-1 text-xs">{p.name}</p>
                   </li>
                 ))}
               </ul>

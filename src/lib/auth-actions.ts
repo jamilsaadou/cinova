@@ -2,7 +2,6 @@
 
 import { randomBytes } from "crypto";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
@@ -123,7 +122,7 @@ export async function registerAction(
 
 // ───────────────────────── Connexion ─────────────────────────
 
-export type LoginState = { status: "idle" | "error"; error?: string };
+export type LoginState = { status: "idle" | "error" | "success"; error?: string };
 
 const loginSchema = z.object({
   email: z.string().trim().email(),
@@ -134,7 +133,6 @@ export async function loginAction(
   _prev: LoginState,
   formData: FormData,
 ): Promise<LoginState> {
-  const locale = safeLocale(formData.get("locale"));
   const parsed = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -143,7 +141,7 @@ export async function loginAction(
 
   const email = parsed.data.email.toLowerCase();
   const user = await prisma.user.findUnique({ where: { email } });
-  if (!user?.passwordHash) return { status: "error", error: "invalid_credentials" };
+  if (!user?.isActive || !user.passwordHash) return { status: "error", error: "invalid_credentials" };
 
   const ok = await bcrypt.compare(parsed.data.password, user.passwordHash);
   if (!ok) return { status: "error", error: "invalid_credentials" };
@@ -159,7 +157,8 @@ export async function loginAction(
     return { status: "error", error: "invalid_credentials" };
   }
 
-  redirect(`/${locale}/espace`);
+  // Le formulaire synchronise la session cliente avant de naviguer.
+  return { status: "success" };
 }
 
 // ───────────────────────── Renvoi de vérification ─────────────────────────

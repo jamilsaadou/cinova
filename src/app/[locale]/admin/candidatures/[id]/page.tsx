@@ -1,7 +1,8 @@
+import { AttachmentCard } from "@/components/AttachmentCard";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { requireAdmin, getTeamForAdmin } from "@/lib/admin";
+import { requireBackoffice, getTeamForAdmin } from "@/lib/admin";
 import { getTeamScores } from "@/lib/jury";
 import { CHALLENGE_CODE_TO_KEY } from "@/lib/candidature";
 import {
@@ -28,7 +29,7 @@ export default async function CandidatureDetail({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  await requireAdmin();
+  const viewer = await requireBackoffice();
 
   const team = await getTeamForAdmin(id);
   if (!team) notFound();
@@ -155,10 +156,7 @@ export default async function CandidatureDetail({
               <Card title={tp("attachmentsTitle")}>
                 <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {team.attachments.map((a) => (
-                    <li key={a.id} className="overflow-hidden rounded-xl border border-sand">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`/api/attachments/${a.id}`} alt={a.filename} className="aspect-video w-full object-cover" />
-                    </li>
+                    <li key={a.id}><AttachmentCard attachment={a} /></li>
                   ))}
                 </ul>
               </Card>
@@ -207,6 +205,7 @@ export default async function CandidatureDetail({
             </div>
           </Reveal>
 
+          {viewer.role === "ADMIN" && <>
           {/* Décision du comité */}
           <Reveal delay={200} className="mt-8">
             <div className="rounded-2xl border border-forest-700/20 bg-forest p-6 text-cream-100 sm:p-8">
@@ -281,6 +280,7 @@ export default async function CandidatureDetail({
               </div>
             </div>
           </Reveal>
+          </>}
     </div>
   );
 }
